@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+import "types/message.proto";
+
+package msusers;
+
+service UsersService {
+  rpc Find (SearchCriteria) returns (FindUsers);
+  rpc Create (CreateUser) returns (User);
+  rpc Login (UserLogin) returns (UserToken);
+  rpc Update(UpdateUser) returns (MessageResponse);
+  rpc Remove(IdUser) returns (MessageResponse);
+  rpc UpdatePassword(UpdatePassword) returns (MessageResponse);
+}
+
+message UserToken {
+  required string token = 1;
+}
+
+message FindUsers {
+  repeated User users = 1;
+}
+
+message IdUser {
+  string id = 1;
+}
+
+message UserLogin {
+  required string email = 1;
+  required string password = 2;
+}
+
+message UpdateUser {
+  required string id = 1;
+  map<string, string> user = 2;
+}
+
+message CreateUser {
+  required string email = 1;
+  required string password = 2;
+  required Profile profile = 3;
+}
+
+message CreateProfile {
+  required string name = 1;
+  required string lastname = 2;
+}
+
+message User {
+  string _id = 1;
+  string email = 2;
+  Profile profile = 3;
+}
+
+message Profile {
+  string name = 1;
+  string lastname = 2;
+}
+
+message UpdatePassword {
+  required string id = 1;
+  required string password = 2;
+}

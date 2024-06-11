@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message MessageResponse {
+  string message = 1;
+}
+
+message SearchCriteria {
+  repeated string fields = 1;
+  int32 count = 2;
+  map<string, string> q = 3; 
+  int32 page = 4;
+  map<string, int32> sort = 5;
+}

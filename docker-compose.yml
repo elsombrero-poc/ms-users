@@ -1,0 +1,18 @@
+version: '3'
+services:
+  database:
+    image: mongo:7.0.10-rc0-jammy
+    env_file:
+      - .env.docker
+    volumes:
+      - ./.volumes/database:/data/db
+    ports:
+      - 27017:27017
+  app:
+    build: .
+    env_file:
+      - .env.docker
+    depends_on:
+      - database
+    ports:
+      - 3001:3001
